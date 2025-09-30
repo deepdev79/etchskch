@@ -1,16 +1,17 @@
 * {
   box-sizing: border-box;
 }
-/* html,
+
 body {
-  height: 100%;
-} */
+  background-color: #87cefa;
+}
 
 h1 {
   text-align: center;
 }
 
 .container {
+  background-color: white;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -36,4 +37,42 @@ h1 {
 
 .btn {
   font-size: 2rem;
+  background-color: #ea4c89;
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  line-height: 20px;
+  list-style: none;
+  margin: 0;
+  outline: none;
+  padding: 10px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: color 100ms;
+  vertical-align: baseline;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.btn:hover,
+.btn:focus {
+  background-color: #f082ac;
+}
+
+.color-palate {
+  margin-top: 2%;
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
 }

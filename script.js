@@ -2,6 +2,7 @@
 const container = document.querySelector(".container");
 const option = document.querySelectorAll(".btn");
 const colorPicker = document.getElementById("colorPicker");
+let hue, saturation, lightness;
 
 const createGrid = function (rows, columns) {
   let total = rows * columns;
@@ -20,8 +21,17 @@ const createGrid = function (rows, columns) {
 };
 createGrid(7, 7);
 
+let darkness = 90;
+const prgDrk = function () {
+  if (darkness < 0) darkness = 90;
+  hue = 0;
+  saturation = 0;
+  lightness = darkness;
+  darkness -= 10;
+  return `hsl(${hue},${saturation}%,${lightness}%)`;
+};
+
 const GenerateRandomColor = function () {
-  let hue, saturation, lightness;
   hue = Math.floor(Math.random() * 361);
   saturation = Math.floor(Math.random() * (101 - 10) + 10);
   lightness = Math.floor(Math.random() * (81 - 20) + 20);
@@ -29,6 +39,18 @@ const GenerateRandomColor = function () {
 };
 
 const pickColor = function (choice) {
+  let size;
+  if (choice === "Reset") {
+    do {
+      size = prompt("Enter new size of Grid (Not more than 100)");
+    } while (size > 100);
+    if (size === null || size === "") return;
+    while (container.firstChild) {
+      container.removeChild(container.lastChild);
+    }
+    createGrid(size, size);
+    return;
+  }
   let pickRandomColor;
   container.addEventListener("mouseover", function (e) {
     if (e.target.classList.contains("box"))
@@ -42,6 +64,9 @@ const pickColor = function (choice) {
         case "Random":
           pickRandomColor = GenerateRandomColor();
           e.target.style.backgroundColor = pickRandomColor;
+          break;
+        case "Darken":
+          e.target.style.backgroundColor = prgDrk();
           break;
         default:
           e.target.style.backgroundColor = "green";
@@ -61,19 +86,6 @@ option.forEach((button) =>
 //function returns a random color
 
 
-//function for new grid input by user(resetGrid button)
-const resetGrid = function () {
-  let choice;
-  do {
-    choice = prompt("Enter new size of Grid (Not more than 100)");
-  } while (choice > 100);
-  if (choice === null || choice === "") return;
-
-  while (color.firstChild) {
-    color.removeChild(color.lastChild);
-  }
-  createGrid(choice);
-};
 
 //clears grid
 const resetBoard = function () {
